@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  chat-api:
+    build: ./backend
+    container_name: devopsgpt-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+
+  chat-ui:
+    build: ./frontend
+    container_name: devopsgpt-ui
+    ports:
+      - "5173:5173"
+    depends_on:
+      - chat-api
+    environment:
+      - VITE_API_URL=http://chat-api:3000
+
+  cache:
+    image: redis:7-alpine
+    container_name: devopsgpt-cache
+    ports:
+      - "6379:6379"
