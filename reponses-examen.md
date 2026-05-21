@@ -21,12 +21,15 @@ Le système DevOpsGPT communique avec trois éléments principaux :
 7. La réponse est sauvegardée dans la base de données.
 8. La réponse est affichée à l'utilisateur.
 
+Voir les fichiers :
+
 - diagramme-contexte-devopsgpt.png
 - flowchart-message-devopsgpt.png
 
 ### 3. Dictionnaire de données
 
 Voir le fichier :
+
 - dictionnaire-donnees-message.png
 
 ## Exercice 2 - Git et Docker
@@ -117,3 +120,14 @@ Pour injecter le secret dans le fichier `.github/workflows/main.yml`, on utilise
 ```yaml
 env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+```
+
+Exemple dans une étape de déploiement :
+
+```yaml
+- name: Déploiement
+  if: startsWith(github.ref, 'refs/tags/v')
+  env:
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  run: echo "Déploiement en cours..."
+```
