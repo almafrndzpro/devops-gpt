@@ -15,15 +15,20 @@ jobs:
       - name: Récupération du code
         uses: actions/checkout@v4
 
+      - name: Installation de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Installation des dépendances Backend
         run: |
-        cd backend
-        npm install
+          cd backend
+          npm install
 
       - name: Installation des dépendances Frontend
         run: |
-        cd frontend
-        npm install
+          cd frontend
+          npm install
 
       - name: Exécution des tests
         run: echo "Tests exécutés avec succès"
